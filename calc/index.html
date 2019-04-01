@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HTML CSS JS CALC</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-size: 16px;
+    }
+    .bg {
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(to right, #090909, #888888);
+    }
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      /* background: red; */
+    }
+    table {
+      /* background: red; */
+      border-spacing: 0 !important;
+    }
+    input[name = "display"] {
+      margin-left: 2px;
+      width: 188px;
+      height: 30px;
+      font-size: 1.3em;
+      padding: 10px;
+      text-align: right;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .fr {
+      margin-left: 2px;
+    }
+    .btn {
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      font-size: 1.3em;
+      /* margin-top: 2px; */
+      border: none;
+      color: #000000;
+      transition: all .2s ease-in-out;
+      outline: none;  
+    }
+    .btn:hover {
+      background: #1e1e1e;
+      color: #ffffff;
+    }
+    .nmbr {
+      color: #ffffff;
+      background: #1d1d1d;
+    }
+    .nmbr:hover {
+      background: #dddddd;
+      color: #000000;
+    }
+    .btn {
+      outline: none;
+    }
+    
+  </style>
+
+  
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="container">
+    <form name="calc">
+      <input name="display">
+      <table>
+          <tr>
+            <td>
+              <input class="btn fr" onclick="clearAll()" type="button" value="C">
+              <input class="btn" onclick="backOne()" type="button" value="<">
+              <input class="btn" onclick="showValue(this.value)" type="button" value="%">
+              <input class="btn" onclick="showValue(this.value)" type="button" value="/">
+            </td>
+          </tr>
+        <tr>
+          <td>
+            <input class="btn nmbr fr" onclick="showValue(this.value)" type="button" value="7">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="8">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="9">
+            <input class="btn" onclick="showValue(this.value)" type="button" value="*">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="btn nmbr fr" onclick="showValue(this.value)" type="button" value="4">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="5">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="6">
+            <input class="btn" onclick="showValue(this.value)" type="button" value="-">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="btn nmbr fr" onclick="showValue(this.value)" type="button" value="1">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="2">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="3">
+            <input class="btn" onclick="showValue(this.value)" type="button" value="+">
+            
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input class="btn fr" onclick="showValue(this.value)" type="button" value=".">
+            <input class="btn nmbr" onclick="showValue(this.value)" type="button" value="0">
+            <input class="btn" onclick="calculate()" type="button" style="width: 104px" value="=">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  <script>
+
+    // to do: make it work with preceding 0
+    // if starts with a 0 but not followed by decimal point, remove the 0
+
+    var evaled = false;
+
+    function showValue(val){
+      document.calc.display.value = evaled ? val : document.calc.display.value + val;
+      evaled = false;
+    }
+
+    function clearAll(){
+      document.calc.display.value = "";
+    }
+
+    function backOne(){
+      var curr = document.calc.display.value;
+      document.calc.display.value = curr.substring(0, curr.length - 1);
+    }
+
+    function calculate(){
+      var curr = document.calc.display.value;
+      if(curr) {
+        document.calc.display.value = eval(curr);
+        evaled = true;
+      }
+    }
+  </script>
+</body>
+</html>
